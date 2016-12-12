@@ -1,0 +1,33 @@
+<script>
+	dataLayer = [{
+		'transactionId': '{{ checkout.id }}',
+		'transactionTotal': {{ checkout.total_price }},
+		'transactionTax': {{ checkout.tax_price }},
+		'transactionShipping': {{ checkout.shipping_method.price }},
+		'transactionProducts': [
+            {% for item in checkout.line_items %}
+            {% if forloop.index > 1 %}, {% endif %}{
+				'sku': '{{ item.sku }}',
+				'name': '{{ item.title | handleize | replace: '-', ' ' }}',
+				'price': {{ item.price }},
+				'quantity': {{ item.quantity }}
+			}
+            {% endfor %}]
+	}];
+
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+		w[l] = w[l] || [];
+		w[l].push({
+			'gtm.start': new Date().getTime(), event: 'gtm.js'
+		});
+		var f = d.getElementsByTagName(s)[0],
+			j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+		j.async = true;
+		j.src =
+			'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+		f.parentNode.insertBefore(j, f);
+	})(window, document, 'script', 'dataLayer', 'GTM-XXXXX');</script>
+<!-- End Google Tag Manager -->
