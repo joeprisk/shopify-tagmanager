@@ -1,15 +1,15 @@
 <script>
 	dataLayer = [{
 		'transactionId': '{{ checkout.id }}',
-		'transactionTotal': {{ checkout.total_price }},
-		'transactionTax': {{ checkout.tax_price }},
-		'transactionShipping': {{ checkout.shipping_method.price }},
+		'transactionTotal': {{ checkout.total_price | money_without_currency }},
+		'transactionTax': {{ checkout.tax_price | money_without_currency }},
+		'transactionShipping': {{ checkout.shipping_method.price | money_without_currency}},
 		'transactionProducts': [
             {% for item in checkout.line_items %}
             {% if forloop.index > 1 %}, {% endif %}{
 				'sku': '{{ item.sku }}',
 				'name': '{{ item.title | handleize | replace: '-', ' ' }}',
-				'price': {{ item.price }},
+				'price': {{ item.price | money_without_currency }},
 				'quantity': {{ item.quantity }}
 			}
             {% endfor %}]
