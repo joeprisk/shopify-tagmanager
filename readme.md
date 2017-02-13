@@ -2,6 +2,8 @@
 
 I've put this here in the hope it may save someone half an hour of googling.
 
+To use e-commerce tracking make sure to include analytics through the shopify cms (Online store -> preferences -> analytics ) and uncheck advanced e-commerce as this will double record the sales. Then continue below.
+
 Standard shopify gives you full control of your theme files until it gets to the payment gateway and the checkout process.
 You can however inject code from within the admin, and get access to the full checkout object supplied in the liquid template.
 
